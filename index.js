@@ -4,8 +4,6 @@ class Character {
     this.health = health;
   }
 attack(opposingPlayer) {
-    //code to attack opposingPlayer if Math.random() is greater than 0.5
-
         if (Math.random() > 0.5)  {
         opposingPlayer.health --;
         this.attackPower --;
@@ -25,11 +23,11 @@ class Red extends Character {
     this.color =  'red';
   }
 }
-const winnerArr = ['red', 'red', 'blue', 'blue', 'red'];
-const newArr = winnerArr.map((element, index) => ({winner: element}));
+//const winnerArr = ['red', 'red', 'blue', 'blue', 'red'];
+//const newArr = winnerArr.map((element, index) => ({winner: element}));
 
 const firstBlue = new Blue(15, 10);
-const firstRed = new Red(8, 10);
+const firstRed = new Red(15, 10);
 
 function battle(playerOne, playerTwo) {
   let first = arguments[Math.random().toFixed()];
@@ -48,7 +46,7 @@ function battle(playerOne, playerTwo) {
             break;
           }
         }
-        else if (second.attackPower >0) {
+        else if (second.attackPower > 0) {
                 second.attack(first);
                 flip = !flip;
              }
@@ -56,10 +54,32 @@ function battle(playerOne, playerTwo) {
                break;
              }
     }
-    console.log('first health: ', first.health, 'first Power: ', first.attackPower);
-    console.log('second health: ', second.health, 'second Power: ', second.attackPower);
-    if (first.health === 0 || first.attackPower === 0) console.log(second.color + ' won!') ;
-    else console.log(first.color + ' won!');
+    if (first.health === 0 || first.attackPower === 0) {
+      console.log(`${second.color}  won!`) ;
+      return second.color;
+    }
+    else {
+      console.log(`${first.color}  won!`);
+      return first.color;
+    }
 }
-battle(firstBlue, firstRed);
+
+function battles(n) {
+  const counter = n;
+  const winnerArr = [];
+
+  for (let i =0; i < n; i ++) {
+    let winner = battle(firstBlue, firstRed);
+     winnerArr.push({winner});
+  }
+  console.log('WINNERS: ', winnerArr);
+}
+battles(5);
+
+function returnNumberSum(x,y,z){
+    console.log(x + y + z);
+}
+
+returnNumberSum(...[1,8,7]);
+
 console.log('I am working');

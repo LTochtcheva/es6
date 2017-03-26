@@ -19,8 +19,6 @@ var Character = function () {
   _createClass(Character, [{
     key: 'attack',
     value: function attack(opposingPlayer) {
-      //code to attack opposingPlayer if Math.random() is greater than 0.5
-
       if (Math.random() > 0.5) {
         opposingPlayer.health--;
         this.attackPower--;
@@ -60,14 +58,11 @@ var Red = function (_Character2) {
 
   return Red;
 }(Character);
-
-var winnerArr = ['red', 'red', 'blue', 'blue', 'red'];
-var newArr = winnerArr.map(function (element, index) {
-  return { winner: element };
-});
+//const winnerArr = ['red', 'red', 'blue', 'blue', 'red'];
+//const newArr = winnerArr.map((element, index) => ({winner: element}));
 
 var firstBlue = new Blue(15, 10);
-var firstRed = new Red(8, 10);
+var firstRed = new Red(15, 10);
 
 function battle(playerOne, playerTwo) {
   var first = arguments[Math.random().toFixed()];
@@ -90,9 +85,31 @@ function battle(playerOne, playerTwo) {
       break;
     }
   }
-  console.log('first health: ', first.health, 'first Power: ', first.attackPower);
-  console.log('second health: ', second.health, 'second Power: ', second.attackPower);
-  if (first.health === 0 || first.attackPower === 0) console.log(second.color + ' won!');else console.log(first.color + ' won!');
+  if (first.health === 0 || first.attackPower === 0) {
+    console.log(second.color + '  won!');
+    return second.color;
+  } else {
+    console.log(first.color + '  won!');
+    return first.color;
+  }
 }
-battle(firstBlue, firstRed);
+
+function battles(n) {
+  var counter = n;
+  var winnerArr = [];
+
+  for (var i = 0; i < n; i++) {
+    var winner = battle(firstBlue, firstRed);
+    winnerArr.push({ winner: winner });
+  }
+  console.log('WINNERS: ', winnerArr);
+}
+battles(5);
+
+function returnNumberSum(x, y, z) {
+  console.log(x + y + z);
+}
+
+returnNumberSum.apply(undefined, [1, 8, 7]);
+
 console.log('I am working');
